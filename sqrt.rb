@@ -118,6 +118,10 @@ def newtons_fast(n)
 end
 
 
+# Inspired by the second answer here:
+# http://cs.stackexchange.com/questions/37596/arbitrary-precision-integer-square-root-algorithm
+# Released under the Ruby license.
+
 def ins_find_initial_exponent(nbits)
   nbits = nbits / 2 + 2 while nbits > 53
   nbits
