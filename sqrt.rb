@@ -173,7 +173,9 @@ def inverse_newton_sqrt(n)
   e_0 = ins_find_initial_exponent(n_bits)
   r = ins_find_initial_r(n, e_0)
   e_bits, r, x = ins_core(n, e_0, r, exp)
-  r * x >> (e_bits << 1) - (exp >> 1)
+  result = r * x >> (e_bits << 1) - (exp >> 1)
+  result += 1 if n > almost * almost + (almost << 1)
+  result
 end
 
 def valid_inverse_newton_sqrt(n)
