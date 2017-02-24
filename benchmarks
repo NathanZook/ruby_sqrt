@@ -1,0 +1,150 @@
+WARNING:  The performance of some of these algorithms can be very sesitive to
+the number being tested.  These should be taken as rough numbers.
+
+integer squareroot tests for n = 10**50
+Warming up --------------------------------------
+              iroot2     2.446k i/100ms
+           isqrt1(n)     2.833k i/100ms
+     newtons_fast(n)    16.209k i/100ms
+    newton_faster(n)    32.002k i/100ms
+           sqrt_z(n)    15.413k i/100ms
+      inverse newton    21.910k i/100ms
+Calculating -------------------------------------
+              iroot2     24.994k (± 0.5%) i/s -    127.192k in   5.089022s
+           isqrt1(n)     28.759k (± 0.7%) i/s -    144.483k in   5.024283s
+     newtons_fast(n)    176.714k (± 1.3%) i/s -    891.495k in   5.045686s
+    newton_faster(n)    389.709k (± 0.8%) i/s -      1.952M in   5.009508s
+           sqrt_z(n)    166.894k (± 1.4%) i/s -    847.715k in   5.080312s
+      inverse newton    250.008k (± 0.4%) i/s -      1.271M in   5.083042s
+
+Comparison:
+    newton_faster(n):   389708.9 i/s
+      inverse newton:   250007.5 i/s - 1.56x  slower
+     newtons_fast(n):   176713.8 i/s - 2.21x  slower
+           sqrt_z(n):   166894.5 i/s - 2.34x  slower
+           isqrt1(n):    28758.5 i/s - 13.55x  slower
+              iroot2:    24994.1 i/s - 15.59x  slower
+
+integer squareroot tests for n = 10**500
+Warming up --------------------------------------
+              iroot2    98.000  i/100ms
+           isqrt1(n)   103.000  i/100ms
+     newtons_fast(n)     3.048k i/100ms
+    newton_faster(n)     5.885k i/100ms
+           sqrt_z(n)     3.214k i/100ms
+      inverse newton     4.961k i/100ms
+Calculating -------------------------------------
+              iroot2    979.374  (± 0.9%) i/s -      4.900k in   5.003590s
+           isqrt1(n)      1.028k (± 1.9%) i/s -      5.150k in   5.010134s
+     newtons_fast(n)     31.530k (± 3.4%) i/s -    158.496k in   5.032977s
+    newton_faster(n)     61.087k (± 3.1%) i/s -    306.020k in   5.014480s
+           sqrt_z(n)     33.167k (± 0.5%) i/s -    167.128k in   5.039057s
+      inverse newton     51.252k (± 3.6%) i/s -    257.972k in   5.041610s
+
+Comparison:
+    newton_faster(n):    61086.6 i/s
+      inverse newton:    51252.4 i/s - 1.19x  slower
+           sqrt_z(n):    33167.2 i/s - 1.84x  slower
+     newtons_fast(n):    31530.2 i/s - 1.94x  slower
+           isqrt1(n):     1028.3 i/s - 59.40x  slower
+              iroot2:      979.4 i/s - 62.37x  slower
+
+integer squareroot tests for n = 10**1000
+Warming up --------------------------------------
+              iroot2    32.000  i/100ms
+           isqrt1(n)    42.000  i/100ms
+     newtons_fast(n)     1.378k i/100ms
+    newton_faster(n)     2.374k i/100ms
+           sqrt_z(n)     2.500k i/100ms
+      inverse newton     2.850k i/100ms
+Calculating -------------------------------------
+              iroot2    323.890  (± 1.2%) i/s -      1.632k in   5.039446s
+           isqrt1(n)    421.655  (± 1.7%) i/s -      2.142k in   5.081594s
+     newtons_fast(n)     14.085k (± 0.8%) i/s -     71.656k in   5.087601s
+    newton_faster(n)     24.078k (± 3.3%) i/s -    121.074k in   5.034512s
+           sqrt_z(n)     25.410k (± 2.3%) i/s -    127.500k in   5.020581s
+      inverse newton     28.921k (± 2.7%) i/s -    145.350k in   5.030223s
+
+Comparison:
+      inverse newton:    28921.2 i/s
+           sqrt_z(n):    25410.0 i/s - 1.14x  slower
+    newton_faster(n):    24078.3 i/s - 1.20x  slower
+     newtons_fast(n):    14085.3 i/s - 2.05x  slower
+           isqrt1(n):      421.7 i/s - 68.59x  slower
+              iroot2:      323.9 i/s - 89.29x  slower
+
+integer squareroot tests for n = 10**2000
+Warming up --------------------------------------
+              iroot2     7.000  i/100ms
+           isqrt1(n)    16.000  i/100ms
+     newtons_fast(n)   397.000  i/100ms
+    newton_faster(n)   667.000  i/100ms
+           sqrt_z(n)     1.901k i/100ms
+      inverse newton     1.352k i/100ms
+Calculating -------------------------------------
+              iroot2     74.965  (± 1.3%) i/s -    378.000  in   5.042705s
+           isqrt1(n)    168.105  (± 1.2%) i/s -    848.000  in   5.045442s
+     newtons_fast(n)      3.994k (± 0.7%) i/s -     20.247k in   5.069925s
+    newton_faster(n)      6.698k (± 0.7%) i/s -     34.017k in   5.079015s
+           sqrt_z(n)     19.176k (± 2.3%) i/s -     96.951k in   5.058731s
+      inverse newton     13.724k (± 1.7%) i/s -     68.952k in   5.025785s
+
+Comparison:
+           sqrt_z(n):    19176.1 i/s
+      inverse newton:    13723.6 i/s - 1.40x  slower
+    newton_faster(n):     6697.9 i/s - 2.86x  slower
+     newtons_fast(n):     3993.7 i/s - 4.80x  slower
+           isqrt1(n):      168.1 i/s - 114.07x  slower
+              iroot2:       75.0 i/s - 255.80x  slower
+
+integer squareroot tests for n = 10**4000
+Warming up --------------------------------------
+              iroot2     1.000  i/100ms
+           isqrt1(n)     6.000  i/100ms
+     newtons_fast(n)   103.000  i/100ms
+    newton_faster(n)   160.000  i/100ms
+           sqrt_z(n)     1.225k i/100ms
+      inverse newton   607.000  i/100ms
+Calculating -------------------------------------
+              iroot2     14.932  (± 0.0%) i/s -     75.000  in   5.024015s
+           isqrt1(n)     61.628  (± 1.6%) i/s -    312.000  in   5.063439s
+     newtons_fast(n)      1.035k (± 0.4%) i/s -      5.253k in   5.074204s
+    newton_faster(n)      1.600k (± 0.9%) i/s -      8.000k in   5.001751s
+           sqrt_z(n)     12.478k (± 0.7%) i/s -     62.475k in   5.006905s
+      inverse newton      6.094k (± 0.7%) i/s -     30.957k in   5.079890s
+
+Comparison:
+           sqrt_z(n):    12478.4 i/s
+      inverse newton:     6094.3 i/s - 2.05x  slower
+    newton_faster(n):     1599.6 i/s - 7.80x  slower
+     newtons_fast(n):     1035.3 i/s - 12.05x  slower
+           isqrt1(n):       61.6 i/s - 202.48x  slower
+              iroot2:       14.9 i/s - 835.68x  slower
+
+integer squareroot tests for n = 10**5000
+Warming up --------------------------------------
+              iroot2     1.000  i/100ms
+           isqrt1(n)     4.000  i/100ms
+     newtons_fast(n)    62.000  i/100ms
+    newton_faster(n)    91.000  i/100ms
+           sqrt_z(n)   996.000  i/100ms
+      inverse newton   457.000  i/100ms
+Calculating -------------------------------------
+              iroot2      8.631  (± 0.0%) i/s -     44.000  in   5.103978s
+           isqrt1(n)     43.491  (± 2.3%) i/s -    220.000  in   5.059748s
+     newtons_fast(n)    628.308  (± 0.6%) i/s -      3.162k in   5.032783s
+    newton_faster(n)    915.131  (± 0.4%) i/s -      4.641k in   5.071494s
+           sqrt_z(n)     10.107k (± 0.6%) i/s -     50.796k in   5.026155s
+      inverse newton      4.539k (± 3.0%) i/s -     22.850k in   5.038822s
+
+Comparison:
+           sqrt_z(n):    10106.7 i/s
+      inverse newton:     4539.1 i/s - 2.23x  slower
+    newton_faster(n):      915.1 i/s - 11.04x  slower
+     newtons_fast(n):      628.3 i/s - 16.09x  slower
+           isqrt1(n):       43.5 i/s - 232.38x  slower
+              iroot2:        8.6 i/s - 1170.92x  slower
+
+=> [50, 500, 1000, 2000, 4000, 5000]
+
+
