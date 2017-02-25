@@ -173,9 +173,8 @@ def inverse_newton_sqrt(n)
   e_0 = ins_find_initial_exponent(n_bits)
   r = ins_find_initial_r(n, e_0)
   e_bits, r, x = ins_core(n, e_0, r, exp)
-  result = r * x >> (e_bits << 1) - (exp >> 1)
-  result += 1 if n > almost * almost + (almost << 1)
-  result
+  root = r * x >> (e_bits << 1) - (exp >> 1)
+  root += 1 if n > root * root + (root << 1)
 end
 
 def valid_inverse_newton_sqrt(n)
@@ -187,7 +186,7 @@ def valid_inverse_newton_sqrt(n)
   result
 end
 
-
+require 'benchmark/ips'
 
 [50, 500, 1000, 2000, 4000, 5000].each do |exp|
   Benchmark.ips do |x|
