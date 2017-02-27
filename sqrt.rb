@@ -86,7 +86,6 @@ def isqrt1(n)
   r
 end
 
-
 def newton_loop(n, x)
   y = (x + n/x) / 2
   while y != x
@@ -117,6 +116,15 @@ def newtons_fast(n)
   newton_loop(n, x)
 end
 
+# Newton's method coded in C for Ruby Integer#sqrt version method
+def newton_rbsqrt(n)
+  return nil if n < 0
+  return n if n < 2
+  b = n.bit_length
+  x = 1 << (b-1)/2 | n >> (b/2 + 1)
+  while (t = n / x) < x; x = ((x + t) >> 1) end
+  x
+end
 
 # Inspired by the second answer here:
 # http://cs.stackexchange.com/questions/37596/arbitrary-precision-integer-square-root-algorithm
@@ -194,6 +202,7 @@ require 'benchmark/ips'
     puts "integer squareroot tests for n = 10**#{exp}"
     x.report("newtons_fast(n)") { newtons_fast(n) }
     x.report("newton_faster(n)") { newton_faster(n) }
+    x.report("newton_rbsqrt(n)") { newton_rbsqrt(n) }
     x.report("sqrt_z(n)") { sqrt_z(n) }
     x.report("inverse newton(n)") { inverse_newton_sqrt(n) }
     x.compare!
