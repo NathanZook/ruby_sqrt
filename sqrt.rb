@@ -116,7 +116,7 @@ def newtons_fast(n)
   newton_loop(n, x)
 end
 
-# Newton's method coded in C for Ruby Integer#sqrt version method
+# Newton's method coded in C for Ruby Integer#sqrt method
 def newton_rbsqrt(n)
   return nil if n < 0
   return n if n < 2
