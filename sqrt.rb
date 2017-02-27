@@ -12,7 +12,7 @@ where techniques and code to correct the bug were presented and discussed.
 This code is a fork of bechmarks of methods collected by Nathan Zook, 
 https://github.com/NathanZook/ruby_sqrt, which I have modified and added to.
 
-At the time of writing, Ruby has added the method Integer#sqrt to class Integer,
+At the time of writing, Ruby has added the method Integer#isqrt to class Integer,
 to provide as a fast C implementation of Newton's method to compute the integer
 squareroot of arbitrary sized integers, as shown at the lines in the files below.
 
