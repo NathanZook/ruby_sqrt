@@ -1,3 +1,28 @@
+=begin
+Using the phrase - Math.sqrt(n).to_i - to find the integer squareroot of an
+integer was found to produce incorrect results for n > ~2**52 = 4,503,599,627,370,496.
+
+This bug was raised on the Ruby issues tracker threads listed below:
+
+https://bugs.ruby-lang.org/issues/13219
+https://bugs.ruby-lang.org/issues/13250
+
+where techniques and code to correct the bug were presented and discussed.
+
+This code is a fork of bechmarks of methods collected by Nathan Zook, 
+https://github.com/NathanZook/ruby_sqrt, which I have modified and added to.
+
+At the time of writing, Ruby has added the method Integer#isqrt to class Integer,
+to provide as a fast C implementation of Newton's method to compute the integer
+squareroot of arbitrary sized integers, as shown at the lines in the files below.
+
+bignum.c, starting at line 6772
+https://bugs.ruby-lang.org/projects/ruby-trunk/repository/revisions/57705/entry/bignum.c
+
+numeric.c, starting at line 5131
+https://bugs.ruby-lang.org/projects/ruby-trunk/repository/revisions/57705/entry/numeric.cRuy
+=end
+
 
 # Core Algorithm by Paul Zimmerman, article entitled
 # Karatsuba Square Root
@@ -86,7 +111,6 @@ def isqrt1(n)
   r
 end
 
-
 def newton_loop(n, x)
   y = (x + n/x) / 2
   while y != x
@@ -117,6 +141,15 @@ def newtons_fast(n)
   newton_loop(n, x)
 end
 
+# Newton's method coded in C for Ruby Integer#sqrt method
+def newton_rbsqrt(n)
+  return nil if n < 0
+  return n if n < 2
+  b = n.bit_length
+  x = 1 << (b-1)/2 | n >> (b/2 + 1)
+  while (t = n / x) < x; x = ((x + t) >> 1) end
+  x
+end
 
 # Inspired by the second answer here:
 # http://cs.stackexchange.com/questions/37596/arbitrary-precision-integer-square-root-algorithm
@@ -173,9 +206,8 @@ def inverse_newton_sqrt(n)
   e_0 = ins_find_initial_exponent(n_bits)
   r = ins_find_initial_r(n, e_0)
   e_bits, r, x = ins_core(n, e_0, r, exp)
-  result = r * x >> (e_bits << 1) - (exp >> 1)
-  result += 1 if n > almost * almost + (almost << 1)
-  result
+  root = r * x >> (e_bits << 1) - (exp >> 1)
+  root += 1 if n > root * root + (root << 1)
 end
 
 def valid_inverse_newton_sqrt(n)
@@ -187,7 +219,7 @@ def valid_inverse_newton_sqrt(n)
   result
 end
 
-
+require 'benchmark/ips'
 
 [50, 500, 1000, 2000, 4000, 5000].each do |exp|
   Benchmark.ips do |x|
@@ -195,6 +227,7 @@ end
     puts "integer squareroot tests for n = 10**#{exp}"
     x.report("newtons_fast(n)") { newtons_fast(n) }
     x.report("newton_faster(n)") { newton_faster(n) }
+    x.report("newton_rbsqrt(n)") { newton_rbsqrt(n) }
     x.report("sqrt_z(n)") { sqrt_z(n) }
     x.report("inverse newton(n)") { inverse_newton_sqrt(n) }
     x.compare!
